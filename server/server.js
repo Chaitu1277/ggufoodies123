@@ -26,8 +26,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const serviceAccount = JSON.parse(
-    fs.readFileSync(path.join(__dirname, 'serviceAccountKey.json'), 'utf8')
+    Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_BASE64, 'base64').toString('utf8')
 );
+
 
 if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
     console.error('Cloudinary configuration failed: Missing environment variables');
