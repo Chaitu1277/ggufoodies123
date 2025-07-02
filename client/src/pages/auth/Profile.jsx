@@ -8,6 +8,7 @@ import Footer from '../../components/Footer';
 import { AuthContext } from '../../context/AuthContext';
 
 const Profile = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const { isLoggedIn, logout, cartCount, user, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const [userData, setUserData] = useState({ name: '', email: '', phone: '' });
@@ -25,7 +26,7 @@ const Profile = () => {
     const fetchUserProfile = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`/api/auth/profile`, {
+            const response = await axios.get(`${backendUrl}/api/auth/profile`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setUserData(response.data);
@@ -60,7 +61,7 @@ const Profile = () => {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.put(
-                `/api/auth/profile`,
+                `${backendUrl}/api/auth/profile`,
                 editedUser,
                 { headers: { Authorization: `Bearer ${token}` } }
             );

@@ -9,6 +9,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const LandingPage = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const [currentSlide, setCurrentSlide] = useState(0);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -29,8 +30,8 @@ const LandingPage = () => {
     const fetchData = async () => {
         try {
             const [response, responseItems] = await Promise.all([
-                axios.get(`/api/restaurant/restaurants`),
-                axios.get(`/api/restaurant/all-food-items`),
+                axios.get(`${backendUrl}/api/restaurant/restaurants`),
+                axios.get(`${backendUrl}/api/restaurant/all-food-items`),
             ]);
 
             console.log('Restaurants Response:', response.data);

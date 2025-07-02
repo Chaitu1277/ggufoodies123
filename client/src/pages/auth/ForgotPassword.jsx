@@ -6,6 +6,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const ForgotPassword = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         email: '',
@@ -59,7 +60,7 @@ const ForgotPassword = () => {
                 throw new Error('Both email and phone are required');
             }
 
-            const response = await axios.post(`/api/otp/generate-otp`, {
+            const response = await axios.post(`${backendUrl}/api/otp/generate-otp`, {
                 email,
                 phone,
                 method: 'email' // Default to email for forgot password
@@ -78,7 +79,7 @@ const ForgotPassword = () => {
 
         try {
             const { email, phone } = formData;
-            const response = await axios.post(`/api/otp/generate-otp`, {
+            const response = await axios.post(`${backendUrl}/api/otp/generate-otp`, {
                 email,
                 phone,
                 method: 'email'
@@ -96,7 +97,7 @@ const ForgotPassword = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post(`/api/otp/verify-otp`, {
+            const response = await axios.post(`${backendUrl}/api/otp/verify-otp`, {
                 identifier: formData.email,
                 otp: formData.otp
             });
@@ -126,7 +127,7 @@ const ForgotPassword = () => {
         }
 
         try {
-            const response = await axios.post(`/api/auth/reset-password`, {
+            const response = await axios.post(`${backendUrl}/api/auth/reset-password`, {
                 email: formData.email,
                 phone: formData.phone,
                 newPassword: formData.newPassword

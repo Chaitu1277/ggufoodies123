@@ -9,7 +9,7 @@ const Payment = ({ orderType, cartItems, subtotal, serviceCharge, total, onClose
     const { updateCart } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const loadRazorpay = () => {
         return new Promise((resolve) => {
             if (window.Razorpay) {
@@ -32,7 +32,7 @@ const Payment = ({ orderType, cartItems, subtotal, serviceCharge, total, onClose
 
             // Create the order in the backend
             const res = await axios.post(
-                `/api/orders/create`,
+                `${backendUrl}/api/orders/create`,
                 {
                     orderType,
                     subtotal,
@@ -79,7 +79,7 @@ const Payment = ({ orderType, cartItems, subtotal, serviceCharge, total, onClose
 
                         // Verify payment with the backend
                         const verifyRes = await axios.post(
-                            `/api/orders/verify`,
+                            `${backendUrl}/api/orders/verify`,
                             {
                                 razorpay_payment_id: response.razorpay_payment_id,
                                 razorpay_order_id: response.razorpay_order_id,

@@ -22,6 +22,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 
 const SearchPage = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const location = useLocation();
     const navigate = useNavigate();
     const { searchQuery: initialSearchQuery, scrollToItemId } = location.state || { searchQuery: '' };
@@ -97,7 +98,7 @@ const SearchPage = () => {
     const fetchUserProfile = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`/api/auth/profile`, {
+            const response = await axios.get(`${backendUrl}/api/auth/profile`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setUserName(response.data.name);
@@ -109,8 +110,8 @@ const SearchPage = () => {
     const fetchData = async () => {
         try {
             const [response, responseItems] = await Promise.all([
-                axios.get(`/api/restaurant/restaurants`),
-                axios.get(`/api/restaurant/all-food-items`),
+                axios.get(`${backendUrl}/api/restaurant/restaurants`),
+                axios.get(`${backendUrl}/api/restaurant/all-food-items`),
             ]);
 
             if (response.data.success) {
@@ -353,7 +354,7 @@ const SearchPage = () => {
                 }
             }
             const response = await axios.post(
-                `/api/cart/add`,
+                `${backendUrl}/api/cart/add`,
                 { foodItemId: item._id, quantity: 1 },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -369,9 +370,9 @@ const SearchPage = () => {
         if (newItemToAdd) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`/api/cart/clear`, { headers: { Authorization: `Bearer ${token}` } });
+                await axios.delete(`${backendUrl}/api/cart/clear`, { headers: { Authorization: `Bearer ${token}` } });
                 const response = await axios.post(
-                    `/api/cart/add`,
+                    `${backendUrl}/api/cart/add`,
                     { foodItemId: newItemToAdd._id, quantity: 1 },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );

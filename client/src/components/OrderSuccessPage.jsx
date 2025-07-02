@@ -8,7 +8,7 @@ const OrderSuccessPage = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const initialOrder = state?.order;
-
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const [order, setOrder] = useState(initialOrder);
     const [timeLeft, setTimeLeft] = useState(null);
     const [cancellable, setCancellable] = useState(true);
@@ -25,7 +25,7 @@ const OrderSuccessPage = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`/api/orders`, {
+            const response = await axios.get(`${backendUrl}/api/orders`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             const orders = response.data;
@@ -39,7 +39,7 @@ const OrderSuccessPage = () => {
             if (!latestOrder.otp && latestOrder.status !== 'cancelled') {
                 const newOtp = Math.floor(1000 + Math.random() * 9000);
                 await axios.put(
-                    `/api/orders/${latestOrder.orderId}/update-otp`,
+                    `${backendUrl}/api/orders/${latestOrder.orderId}/update-otp`,
                     { otp: newOtp },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -62,7 +62,7 @@ const OrderSuccessPage = () => {
         const fetchUserData = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`/api/auth/profile`, {
+                const response = await axios.get(`${backendUrl}/api/auth/profile`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUserData(response.data);
@@ -165,7 +165,7 @@ const OrderSuccessPage = () => {
     const handleCancel = async () => {
         try {
             await axios.post(
-                `/api/orders/${order.orderId}/cancel`,
+                `${backendUrl}/api/orders/${order.orderId}/cancel`,
                 {},
                 { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
             );
@@ -184,7 +184,7 @@ const OrderSuccessPage = () => {
         try {
             const token = localStorage.getItem('token');
             await axios.post(
-                `/api/food-items/ratings`,
+                `${backendUrl}/api/food-items/ratings`,
                 {
                     orderId: order.orderId,
                     ratings: Object.entries(ratings).map(([foodItemId, rating]) => ({ foodItemId, rating })),

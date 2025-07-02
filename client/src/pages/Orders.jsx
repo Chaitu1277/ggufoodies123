@@ -13,11 +13,11 @@ const Orders = () => {
     const [activeTab, setActiveTab] = useState('pending');
     const navigate = useNavigate();
     const [isInitialLoad, setIsInitialLoad] = useState(true); // Flag for initial load
-
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const fetchOrders = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`/api/orders`, {
+            const response = await axios.get(`${backendUrl}/api/orders`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setOrders(response.data);
@@ -75,7 +75,7 @@ const Orders = () => {
         e.stopPropagation();
         try {
             const token = localStorage.getItem('token');
-            await axios.post(`/api/orders/${orderId}/cancel`, {}, {
+            await axios.post(`${backendUrl}/api/orders/${orderId}/cancel`, {}, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 

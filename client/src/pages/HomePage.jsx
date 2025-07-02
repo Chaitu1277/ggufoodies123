@@ -24,6 +24,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 
 const HomePage = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const location = useLocation();
     const navigate = useNavigate();
     const { logout, cartItems, cartCount, updateCart } = useContext(AuthContext);
@@ -101,8 +102,8 @@ const HomePage = () => {
     const fetchData = async () => {
         try {
             const [response, responseItems] = await Promise.all([
-                axios.get(`/api/restaurant/restaurants`),
-                axios.get(`/api/restaurant/all-food-items`),
+                axios.get(`${backendUrl}/api/restaurant/restaurants`),
+                axios.get(`${backendUrl}/api/restaurant/all-food-items`),
             ]);
             if (response.data.success) {
                 const updatedRestaurants = processFoodCourts(response.data.restaurants);
@@ -155,7 +156,7 @@ const HomePage = () => {
         const fetchUserProfile = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get(`/api/auth/profile`, {
+                const response = await axios.get(`${backendUrl}/api/auth/profile`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUserName(response.data.name);
@@ -273,7 +274,7 @@ const HomePage = () => {
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
-                `/api/cart/add`,
+                `${backendUrl}/api/cart/add`,
                 {
                     foodItemId: item._id,
                     quantity: 1,
@@ -293,9 +294,9 @@ const HomePage = () => {
         if (newItemToAdd) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`/api/cart/clear`, { headers: { Authorization: `Bearer ${token}` } });
+                await axios.delete(`${backendUrl}/api/cart/clear`, { headers: { Authorization: `Bearer ${token}` } });
                 const response = await axios.post(
-                    `/api/cart/add`,
+                    `${backendUrl}/api/cart/add`,
                     {
                         foodItemId: newItemToAdd._id,
                         quantity: 1,

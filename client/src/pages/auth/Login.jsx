@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../context/AuthContext';
 
 const Login = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -43,7 +44,7 @@ const Login = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post(`/api/auth/login`, formData);
+            const response = await axios.post(`${backendUrl}/api/auth/login`, formData);
             toast.success(response.data.message);
             login(response.data.token);
             const { from, selectedCourt } = location.state || {};

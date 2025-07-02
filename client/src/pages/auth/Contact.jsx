@@ -5,6 +5,7 @@ import Footer from '../../components/Footer'; // Verify this path is correct
 import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi';
 
 const Contact = () => {
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -24,7 +25,7 @@ const Contact = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('/api/contact/send-message', {
+            const response = await fetch(`${backendUrl}/api/contact/send-message`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
