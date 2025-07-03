@@ -7,57 +7,70 @@ const Shipping = () => {
             <Navbar />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <h1 className="text-3xl font-bold text-gray-800 mb-8">Order & Pickup Policy</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-8">Shipping and Delivery Policy</h1>
 
                 <div className="prose max-w-none bg-white p-6 rounded-lg shadow">
-                    <h2>1. Order Options</h2>
+                    <h2>1. Service Options</h2>
                     <p>
-                        GGU Foodies offers two convenient service options:
+                        GGU Foodies is a campus-based food ordering platform exclusively for GGU students and staff. We offer:
                     </p>
                     <ul>
-                        <li><strong>Dine-in:</strong> Pre-order and eat at the food court</li>
-                        <li><strong>Takeaway:</strong> Pre-order and pick up your food to go</li>
+                        <li><strong>Dine-in:</strong> Pre-order meals and enjoy them at the respective food court</li>
+                        <li><strong>Takeaway:</strong> Pre-order and collect food for takeout</li>
                     </ul>
 
-                    <h2>2. Pre-Order System</h2>
+                    <h2>2. How Ordering Works</h2>
                     <p>
-                        Our platform allows you to pre-order meals from GGU food courts to avoid waiting:
+                        Our platform enables convenient pre-ordering:
                     </p>
                     <ul>
-                        <li>Place orders anytime through our app/website</li>
-                        <li>Specify your preferred pickup time</li>
-                        <li>Orders can be placed up to 24 hours in advance</li>
+                        <li>Orders can be placed via our web app</li>
+                        <li>Select your preferred pickup slot</li>
+                        <li>Payments are made securely online through Razorpay</li>
+                        <li>Orders can be placed up to 2 hours in advance</li>
                     </ul>
 
-                    <h2>3. Preparation & Pickup Times</h2>
+                    <h2>3. Preparation & Pickup Timelines</h2>
                     <p>
-                        Standard preparation times:
+                        Estimated food preparation times:
                     </p>
                     <ul>
-                        <li>Regular orders: 20-30 minutes during operational hours (9 AM - 9 PM)</li>
-                        <li>Large/complex orders: 40-50 minutes (you'll be notified if additional time is needed)</li>
+                        <li>Regular meals: 20–30 minutes during service hours (9:00 AM – 9:00 PM)</li>
+                        <li>Bulk/complex orders: 40–50 minutes (users will be notified if extra time is required)</li>
                     </ul>
 
                     <h2>4. Order Notifications</h2>
                     <p>
-                        You will receive SMS notifications about your order status:
+                        Notifications related to your order will be sent to your registered email:
                     </p>
                     <ul>
                         <li>Order confirmation</li>
-                        <li>When your order is being prepared</li>
+                        <li>When your order is under preparation</li>
                         <li>When your order is ready for pickup</li>
-                        <li>Reminder if order isn't picked up within 15 minutes of readiness</li>
+                        <li>Reminder if not picked up within 15 minutes of readiness</li>
                     </ul>
 
-                    <h2>5. Pickup Policy</h2>
+                    <h2>5. Pickup Guidelines</h2>
                     <p>
-                        Important pickup information:
+                        To ensure smooth and timely pickups:
                     </p>
                     <ul>
-                        <li>Present your order confirmation (digital or printed) when picking up</li>
-                        <li>Orders must be picked up within 30 minutes of readiness notification</li>
-                        <li>Unclaimed orders after 30 minutes may be discarded with no refund</li>
+                        <li>Show your order confirmation email or OTP to verify your identity</li>
+                        <li>Orders must be picked up within 30 minutes after notification</li>
+                        <li>Orders not collected within this timeframe may be discarded without refund</li>
                     </ul>
+
+                    <h2>6. Refunds & Cancellations</h2>
+                    <p>
+                        Once an order is placed and payment is confirmed, it cannot be canceled. Refunds will not be issued unless:
+                    </p>
+                    <ul>
+                        <li>The vendor fails to prepare your order</li>
+                        <li>You are charged but do not receive the item (upon verification)</li>
+                    </ul>
+                    <p>
+                        All refund requests are subject to approval and will be processed within 5–7 business days.
+                    </p>
                 </div>
             </div>
 
