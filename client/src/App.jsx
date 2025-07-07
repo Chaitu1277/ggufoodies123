@@ -21,7 +21,7 @@ import Shipping from './pages/auth/Shipping';
 import Contact from './pages/auth/Contact';
 import Refunds from './pages/auth/Refunds';
 import ProtectedRoute from './components/ProtectedRoute';
-import ErrorBoundary from './components/ErrorBoundary';
+import FoodCourtDetailsPage from './pages/FoodCourtDetailsPage';
 
 function App() {
   return (
@@ -44,6 +44,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+            <Route path="/food-court-details" element={<ProtectedRoute><FoodCourtDetailsPage /></ProtectedRoute>} />
             <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/about" element={<About />} />
@@ -56,7 +57,7 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/shipping" element={<Shipping />} />
-            <Route path="/contact" element={<ErrorBoundary><Contact /></ErrorBoundary>} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/refunds" element={<Refunds />} />
           </Routes>
         </div>
